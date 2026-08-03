@@ -67,7 +67,31 @@
     <article class="bento__cell bento__cell--overview">
       <p class="bento__label">Destination</p>
       <h2 class="overview__city">Paris <span class="overview__flag" title="France">🇫🇷</span></h2>
+
+      <p class="overview__country">France</p>
+      <dl class="overview__stats">
+        <div class="stat"><dt>Population</dt><dd class="mono" id="stat-population" data-countup="2102650">0</dd></div>
+        <div class="stat"><dt>Coordinates</dt><dd class="mono">48.8566° N, 2.3522° E</dd></div>
+        <div class="stat"><dt>Language</dt><dd class="mono">French</dd></div>
+      </dl>
     </article>
+
+    <article class="bento__cell bento__cell--weather card">
+      <div class="card__header">
+        <span class="card__label">Weather</span>
+        <svg class="card__icon" viewBox="0 0 24 24" fill="none"><path d="M17.5 18a3.5 3.5 0 0 0 0-7 5.5 5.5 0 0 0-10.6-1.7A4 4 0 0 0 7 18h10.5Z" stroke="currentColor" stroke-width="1.5"/></svg>
+      </div>
+      <p class="card__value mono"><span id="stat-temp" data-countup="21" data-countup-suffix="°">0</span></p>
+      <p class="card__desc" id="weather-desc">Partly cloudy</p>
+      <div class="card__meta">
+        <div><span>Humidity</span><strong class="mono" id="weather-humidity">64%</strong></div>
+        <div><span>Wind</span><strong class="mono" id="weather-wind">14 km/h</strong></div>
+        <div><span>Sunrise</span><strong class="mono" id="weather-sunrise">6:12</strong></div>
+        <div><span>Sunset</span><strong class="mono" id="weather-sunset">20:47</strong></div>
+      </div>
+    </article>
+
+
   </section>
 
 
