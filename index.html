@@ -1,65 +1,77 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Voyageur — Explore Your Next Adventure</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Voyageur — Explore Your Next Adventure</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;1,9..144,500&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
 </head>
 <body>
 
-  <!-- Hero  -->
+<!-- Hero  -->
 
 <header class="hero" id="hero">
-  <div class="hero__image-stack" id="hero-image-stack" aria-hidden="true">
-    <div class="hero__image hero__image--current" id="hero-image"></div>
-    <div class="hero__image hero__image--incoming" id="hero-image-incoming"></div>
-  </div>
-  <div class="hero__scim"></div>
+<div class="hero__image-stack" id="hero-image-stack" aria-hidden="true">
+  <div class="hero__image hero__image--current" id="hero-image"></div>
+  <div class="hero__image hero__image--incoming" id="hero-image-incoming"></div>
+</div>
+<div class="hero__scim"></div>
 
-  <nav class="topbar">
-    <span class="topbar__meta mano">01 - DESTINATION SEARCH</span>
-  </nav>
+<nav class="topbar">
+  <span class="topbar__meta mano">01 - DESTINATION SEARCH</span>
+</nav>
 
-  <div class="hero__content">
-    <p class="eyebrow">Live weather · maps · local time</p>
-    <h1 class="hero__title">Where to,<br>this time?</h1>
-    <p class="hero__subtitle">Search any city and get the full picture in one place.</p>
-  </div>
- 
-  <form class="search-bar" id="search-form">
-    <svg class="icon icon--pin" viewBox="0 0 24 24" fill="none"><path d="M12 22s7-7.58 7-13a7 7 0 1 0-14 0c0 5.42 7 13 7 13Z" stroke="currentColor" stroke-width="1.6"/><circle cx="12" cy="9" r="2.4" stroke="currentColor" stroke-width="1.6"/></svg>
-    <input type="text" id="city-input" placeholder="Paris, Tokyo, Dubai…" autocomplete="off" required>
-    <button type="submit" class="search-bar__submit" aria-label="Search">
-      <svg class="icon icon--arrow" viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-    </button>
-  </form>
+<div class="hero__content">
+  <p class="eyebrow">Live weather · maps · local time</p>
+  <h1 class="hero__title">Where to,<br>this time?</h1>
+  <p class="hero__subtitle">Search any city and get the full picture in one place.</p>
+</div>
+
+<form class="search-bar" id="search-form">
+  <svg class="icon icon--pin" viewBox="0 0 24 24" fill="none"><path d="M12 22s7-7.58 7-13a7 7 0 1 0-14 0c0 5.42 7 13 7 13Z" stroke="currentColor" stroke-width="1.6"/><circle cx="12" cy="9" r="2.4" stroke="currentColor" stroke-width="1.6"/></svg>
+  <input type="text" id="city-input" placeholder="Paris, Tokyo, Dubai…" autocomplete="off" required>
+  <button type="submit" class="search-bar__submit" aria-label="Search">
+    <svg class="icon icon--arrow" viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+  </button>
+</form>
 </header>
 
 <!-- RESULT --> 
- <main id="result" class="result" data-state="loaded">
+<main id="result" class="result" data-state="loaded">
 
-  <!-- Loading stat_ Hidden by default-->
-   <div class="state state--loading" id="state-loading" hidden>
-    <div class="spinner"></div>
-    <p>Fetching your destination</p>
-   </div>
+<!-- Loading stat_ Hidden by default-->
+  <div class="state state--loading" id="state-loading" hidden>
+  <div class="spinner"></div>
+  <p>Fetching your destination</p>
+  </div>
 
-   <!-- emoty state  -->
-    <div class="state state--empty" id="stae-empty">
-    <p class="state__title">No destination yet</p>
-    <p class="state__body">Search a city above to see live weather, local time, and a map</p>
-    </div>
+  <!-- emoty state  -->
+  <div class="state state--empty" id="stae-empty">
+  <p class="state__title">No destination yet</p>
+  <p class="state__body">Search a city above to see live weather, local time, and a map</p>
+  </div>
 
-    <!-- Error State -->
-    <div class="state state--error" id="state-error" hidden>
-      <p class="state__title">Couldn't find that city</p>
-      <p class="state__body">Check the spelling and try again, or try a nearby major city.</p>
-    </div>
- </main>
+  <!-- Error State -->
+  <div class="state state--error" id="state-error" hidden>
+    <p class="state__title">Couldn't find that city</p>
+    <p class="state__body">Check the spelling and try again, or try a nearby major city.</p>
+  </div>
+
+  
+    <!-- ---- Bento grid: overview + weather + time + country + currency ---- -->
+  <section class="bento" id="overview-card">
+
+    <article class="bento__cell bento__cell--overview">
+      <p class="bento__label">Destination</p>
+      <h2 class="overview__city">Paris <span class="overview__flag" title="France">🇫🇷</span></h2>
+    </article>
+  </section>
+
+
+</main>
 
 </body>
 </html>
