@@ -38,6 +38,28 @@
     </button>
   </form>
 </header>
-  
+
+<!-- RESULT --> 
+ <main id="result" class="result" data-state="loaded">
+
+  <!-- Loading stat_ Hidden by default-->
+   <div class="state state--loading" id="state-loading" hidden>
+    <div class="spinner"></div>
+    <p>Fetching your destination</p>
+   </div>
+
+   <!-- emoty state  -->
+    <div class="state state--empty" id="stae-empty">
+    <p class="state__title">No destination yet</p>
+    <p class="state__body">Search a city above to see live weather, local time, and a map</p>
+    </div>
+
+    <!-- Error State -->
+    <div class="state state--error" id="state-error" hidden>
+      <p class="state__title">Couldn't find that city</p>
+      <p class="state__body">Check the spelling and try again, or try a nearby major city.</p>
+    </div>
+ </main>
+
 </body>
 </html>
