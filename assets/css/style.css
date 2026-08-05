@@ -1,0 +1,26 @@
+/* Voyageur Styles */
+
+:root { 
+/* Color */
+  --color-bg: #FAFAF7;
+  --color-ink: #14181F;
+  --color-ink-soft: #4B5563;
+  --color-primary: #24438C;
+  --color-accent: #FF5A2A;
+  --color-card: rgba(255, 255, 255, 0.68);
+  --color-card-solid: #FFFFFF;
+  --color-line: rgba(20, 24, 31, 0.09);
+   /* Type */
+  --font-display: 'Fraunces', Georgia, serif;
+  --font-body: 'Inter', system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, monospace;
+ 
+  /* Layout */
+  --radius-lg: 28px;
+  --radius-md: 20px;
+  --radius-sm: 12px;
+  --shadow-soft: 0 30px 60px -30px rgba(20, 24, 31, 0.35);
+  --shadow-card: 0 16px 40px -22px rgba(20, 24, 31, 0.22);
+  --section-gap: 6rem;
+  --max-width: 1180px;
+}
