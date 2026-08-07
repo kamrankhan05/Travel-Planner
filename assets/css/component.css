@@ -17,4 +17,16 @@ transition: transform 220ms ease, box-shadow 220ms ease;
 }
 .search-bar:hover { transform: translateY(-2px); }
 
-.search-bar .icon--pin { color: var(--color-ink-soft); width: 19px; height: 19px; flex-shrink: 0; }
+.search-bar .icon--pin { color: var(--color-ink-soft); width: 19px; height: 19px; flex-shrink: 0; 
+}
+
+.search-bar input {
+  flex: 1;
+  border: none;
+  background: transparent;
+  outline: none;
+  color: var(--color-ink);
+  font-size: 1.02rem;
+  font-family: var(--font-body);
+}
+.search-bar input::placeholder { color: #9AA1AB; }
