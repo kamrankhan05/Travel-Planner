@@ -50,3 +50,31 @@ transition: transform 220ms ease, box-shadow 220ms ease;
 .search-bar__submit .icon--arrow { width: 19px; height: 19px; }
  
 .icon { display: block; }
+
+
+/* STATES (Loading, Empty, Error) */
+
+.state{
+  text-align: center;
+  padding: 4rem 1rem;
+  color: var(--color-ink-soft);
+}
+
+.state__title {
+  font-size: 1.3rem;
+  font-weight: 600;
+  margin-bottom: 0.4rem;
+  color: var(--color-ink);
+  font-family: var(--font-display);
+}
+
+.spinner {
+  width: 32px;
+  height: 32px;
+  margin: 0 auto 1rem;
+  border: 3px solid var(--color-line);
+  border-radius: 50%;
+  border-top-color: var(--color-primary);
+  animation: spin 800ms linear infinite;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
