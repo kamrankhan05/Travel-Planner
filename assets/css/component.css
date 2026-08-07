@@ -138,3 +138,28 @@ transition: transform 220ms ease, box-shadow 220ms ease;
   align-items: center;
   gap: 0.6rem;
 }
+
+.overview__flag { font-size: 0.65em; }
+.overview__country {
+  margin-top: 0.3rem;
+  color: rgba(255,255,255,0.65);
+  font-size: 1.02rem;
+}
+.overview__stats {
+  display: flex;
+  gap: 2.4rem;
+  margin: 0;
+}
+.overview__stats .stat dt {
+  font-size: 0.68rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.5);
+  margin-bottom: 0.35rem;
+}
+.overview__stats .stat dd { margin: 0; font-size: 0.98rem; font-weight: 500; }
+ 
+.bento__cell--weather { grid-column: span 2; grid-row: span 1; }
+.bento__cell--time    { grid-column: span 2; }
+.bento__cell--country { grid-column: span 2; }
+.bento__cell--currency{ grid-column: span 2; }
