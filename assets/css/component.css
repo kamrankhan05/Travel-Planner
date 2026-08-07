@@ -1,0 +1,20 @@
+/* Search bar - floating pill */
+
+.search-bar {
+position: relative;
+z-index: 3;
+margin-top: 2.6rem;
+display: flex;
+align-items: center;
+gap: 0.7rem;
+width: min(480px, 88vw);
+background: rgba(255, 255, 255, 0.94);
+border-radius: 999px;
+padding: 0.5rem 0.5rem 0.5rem 1.4rem;
+box-shadow: var(--shadow-soft);
+animation: fade-up 900ms cubic-bezier(0.16,1,0.3,1) 150ms both;
+transition: transform 220ms ease, box-shadow 220ms ease;
+}
+.search-bar:hover { transform: translateY(-2px); }
+
+.search-bar .icon--pin { color: var(--color-ink-soft); width: 19px; height: 19px; flex-shrink: 0; }
