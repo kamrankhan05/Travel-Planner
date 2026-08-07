@@ -59,9 +59,7 @@ a, button { font-family: inherit; }
   }
 }
 
-/* =========================================================
-   HERO
-   ========================================================= */
+/*   HERO     */
 .hero {
   position: relative;
   min-height: 100vh;
@@ -162,4 +160,15 @@ a, button { font-family: inherit; }
 @keyframes fade-up {
   from { opacity: 0; transform: translateY(18px); }
   to   { opacity: 1; transform: translateY(0); }
+}
+
+   /* RESULTS / LAYOUT SCAFFOLD */
+
+.results {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 6rem 1.5rem var(--section-gap);
+  display: flex;
+  flex-direction: column;
+  gap: var(--section-gap);
 }
