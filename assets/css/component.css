@@ -30,3 +30,23 @@ transition: transform 220ms ease, box-shadow 220ms ease;
   font-family: var(--font-body);
 }
 .search-bar input::placeholder { color: #9AA1AB; }
+
+.search-bar__submit {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 46px;
+  height: 46px;
+  flex-shrink: 0;
+  border: none;
+  cursor: pointer;
+  border-radius: 50%;
+  background: var(--color-ink);
+  color: #fff;
+  transition: background 180ms ease, transform 180ms ease;
+}
+.search-bar__submit:hover { background: var(--color-accent); }
+.search-bar__submit:active { transform: scale(0.94); }
+.search-bar__submit .icon--arrow { width: 19px; height: 19px; }
+ 
+.icon { display: block; }
