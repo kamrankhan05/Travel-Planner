@@ -220,3 +220,25 @@ transition: transform 220ms ease, box-shadow 220ms ease;
   letter-spacing: 0.03em;
 }
 .card__meta strong { font-weight: 600; }
+
+/* SHARED sECTION HEADER / PLACEHOLDER */
+
+.section-header {
+  margin-bottom: 1.6rem;
+}
+.section-header h3 {
+  margin-top: 0.4rem;
+  font-size: 1.6rem;
+  font-style: italic;
+  font-weight: 500;
+}
+.section-placeholder {
+  grid-column: 1 / -1;
+  padding: 3rem 1rem;
+  text-align: center;
+  color: var(--color-ink-soft);
+  font-size: 0.95rem;
+  background: var(--color-card);
+  border: 1px dashed var(--color-line);
+  border-radius: var(--radius-md);
+}
