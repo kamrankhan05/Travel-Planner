@@ -327,3 +327,9 @@ transition: transform 220ms ease, box-shadow 220ms ease;
   text-transform: uppercase;
   color: var(--color-ink-soft);
 }
+.attraction-card__extract {
+  margin-top: 0.6rem;
+  font-size: 0.87rem;
+  color: var(--color-ink-soft);
+  line-height: 1.5;
+}
