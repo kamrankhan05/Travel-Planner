@@ -333,3 +333,18 @@ transition: transform 220ms ease, box-shadow 220ms ease;
   color: var(--color-ink-soft);
   line-height: 1.5;
 }
+
+/* Pack For IT - signature feature */
+
+.pack-section__header { margin-bottom: 1.6rem; }
+.pack-section__header h3 {
+  margin-top: 0.4rem;
+  font-size: 1.6rem;
+  font-style: italic;
+  font-weight: 500;
+}
+.pack-section__sub {
+  margin-top: 0.4rem;
+  color: var(--color-ink-soft);
+  font-size: 0.95rem;
+}
