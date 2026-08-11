@@ -313,3 +313,17 @@ transition: transform 220ms ease, box-shadow 220ms ease;
   object-fit: cover;
   display: block;
 }
+.attraction-card__body { padding: 1.2rem 1.35rem; }
+.attraction-card__title {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: 500;
+  font-size: 1.05rem;
+}
+.attraction-card__distance {
+  margin-top: 0.25rem;
+  font-size: 0.72rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--color-ink-soft);
+}
