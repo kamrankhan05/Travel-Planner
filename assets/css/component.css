@@ -367,3 +367,29 @@ transition: transform 220ms ease, box-shadow 220ms ease;
   transition: transform 180ms ease, box-shadow 180ms ease;
 }
 .pack-item:hover { transform: translateY(-2px); box-shadow: var(--shadow-card); }
+
+.pack-item label {
+  display: grid;
+  grid-template-columns: 20px 1fr;
+  column-gap: 0.9rem;
+  align-items: start;
+  padding: 1rem 1.2rem;
+  cursor: pointer;
+}
+ 
+.pack-item input[type="checkbox"] {
+  appearance: none;
+  -webkit-appearance: none;
+  width: 19px;
+  height: 19px;
+  margin-top: 0.15rem;
+  border: 1.5px solid var(--color-ink-soft);
+  border-radius: 6px;
+  cursor: pointer;
+  position: relative;
+  transition: background 160ms ease, border-color 160ms ease;
+}
+.pack-item input[type="checkbox"]:checked {
+  background: var(--color-accent);
+  border-color: var(--color-accent);
+}
