@@ -393,3 +393,34 @@ transition: transform 220ms ease, box-shadow 220ms ease;
   background: var(--color-accent);
   border-color: var(--color-accent);
 }
+
+.pack-item input[type="checkbox"]:checked::after {
+  content: '';
+  position: absolute;
+  left: 5px;
+  top: 1px;
+  width: 5px;
+  height: 10px;
+  border: solid #fff;
+  border-width: 0 2px 2px 0;
+  transform: rotate(40deg);
+}
+ 
+.pack-item__label {
+  display: block;
+  font-weight: 600;
+  font-size: 0.98rem;
+  transition: color 160ms ease, opacity 160ms ease;
+}
+.pack-item__reason {
+  display: block;
+  margin-top: 0.25rem;
+  font-size: 0.82rem;
+  color: var(--color-ink-soft);
+  line-height: 1.4;
+}
+ 
+.pack-item input[type="checkbox"]:checked ~ .pack-item__body .pack-item__label {
+  text-decoration: line-through;
+  opacity: 0.55;
+}
