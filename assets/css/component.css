@@ -305,3 +305,11 @@ transition: transform 220ms ease, box-shadow 220ms ease;
   color: inherit;
   display: block;
 }
+.attraction-card:hover { transform: translateY(-4px); }
+.attraction-card img {
+  width: 100%;
+  height: 150px;
+  background: var(--color-line);
+  object-fit: cover;
+  display: block;
+}
