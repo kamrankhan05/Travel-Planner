@@ -336,9 +336,6 @@ transition: transform 220ms ease, box-shadow 220ms ease;
 
 /* Pack For IT - signature feature */
 
-/* =========================================
-   PACK FOR IT — Signature Feature
-========================================= */
 
 .pack-section__header {
   margin-bottom: 1.6rem;
@@ -358,9 +355,7 @@ transition: transform 220ms ease, box-shadow 220ms ease;
   line-height: 1.5;
 }
 
-/* =========================================
-   PACKING LIST
-========================================= */
+/* PACKING LIST */
 
 .pack-list {
   list-style: none;
@@ -376,9 +371,7 @@ transition: transform 220ms ease, box-shadow 220ms ease;
   gap: 0.9rem;
 }
 
-/* =========================================
-   PACKING CARD
-========================================= */
+/* PACKING CARD */
 
 .pack-item {
   background: var(--color-card);
@@ -402,9 +395,7 @@ transition: transform 220ms ease, box-shadow 220ms ease;
   box-shadow: var(--shadow-card);
 }
 
-/* =========================================
-   ITEM LABEL
-========================================= */
+/* ITEM LABEL */
 
 .pack-item label {
   display: grid;
@@ -418,9 +409,7 @@ transition: transform 220ms ease, box-shadow 220ms ease;
   cursor: pointer;
 }
 
-/* =========================================
-   CUSTOM CHECKBOX
-========================================= */
+/* CUSTOM CHECKBOX */
 
 .pack-item input[type="checkbox"] {
   appearance: none;
@@ -481,9 +470,7 @@ transition: transform 220ms ease, box-shadow 220ms ease;
   transform: rotate(40deg);
 }
 
-/* =========================================
-   ITEM TEXT
-========================================= */
+/* ITEM TEXT */
 
 .pack-item__label {
   display: block;
@@ -508,9 +495,7 @@ transition: transform 220ms ease, box-shadow 220ms ease;
   color: var(--color-ink-soft);
 }
 
-/* =========================================
-   COMPLETED ITEM
-========================================= */
+/* COMPLETED ITEM */
 
 .pack-item input[type="checkbox"]:checked
   ~ .pack-item__body
@@ -532,9 +517,7 @@ transition: transform 220ms ease, box-shadow 220ms ease;
   );
 }
 
-/* =========================================
-   KEYBOARD ACCESSIBILITY
-========================================= */
+/* KEYBOARD ACCESSIBILITY */
 
 .pack-item:focus-within {
   border-color: var(--color-accent);
@@ -548,3 +531,13 @@ transition: transform 220ms ease, box-shadow 220ms ease;
     );
 }
 
+
+/* MAP */
+
+.map-section__header { margin-bottom: 1.4rem; }
+.map-section__header h3 {
+  margin-top: 0.4rem;
+  font-size: 1.6rem;
+  font-style: italic;
+  font-weight: 500;
+}
