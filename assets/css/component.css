@@ -336,91 +336,215 @@ transition: transform 220ms ease, box-shadow 220ms ease;
 
 /* Pack For IT - signature feature */
 
-.pack-section__header { margin-bottom: 1.6rem; }
+/* =========================================
+   PACK FOR IT — Signature Feature
+========================================= */
+
+.pack-section__header {
+  margin-bottom: 1.6rem;
+}
+
 .pack-section__header h3 {
   margin-top: 0.4rem;
   font-size: 1.6rem;
   font-style: italic;
   font-weight: 500;
 }
+
 .pack-section__sub {
   margin-top: 0.4rem;
   color: var(--color-ink-soft);
   font-size: 0.95rem;
+  line-height: 1.5;
 }
+
+/* =========================================
+   PACKING LIST
+========================================= */
 
 .pack-list {
   list-style: none;
   margin: 0;
   padding: 0;
+
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  grid-template-columns: repeat(
+    auto-fill,
+    minmax(240px, 1fr)
+  );
+
   gap: 0.9rem;
 }
- 
+
+/* =========================================
+   PACKING CARD
+========================================= */
+
 .pack-item {
   background: var(--color-card);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
+
   border: 1px solid var(--color-line);
   border-radius: var(--radius-sm);
-  transition: transform 180ms ease, box-shadow 180ms ease;
+
+  overflow: hidden;
+
+  transition:
+    transform 180ms ease,
+    box-shadow 180ms ease,
+    border-color 180ms ease,
+    background 180ms ease;
 }
-.pack-item:hover { transform: translateY(-2px); box-shadow: var(--shadow-card); }
+
+.pack-item:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-card);
+}
+
+/* =========================================
+   ITEM LABEL
+========================================= */
 
 .pack-item label {
   display: grid;
   grid-template-columns: 20px 1fr;
   column-gap: 0.9rem;
+
   align-items: start;
+
   padding: 1rem 1.2rem;
+
   cursor: pointer;
 }
- 
+
+/* =========================================
+   CUSTOM CHECKBOX
+========================================= */
+
 .pack-item input[type="checkbox"] {
   appearance: none;
   -webkit-appearance: none;
+
   width: 19px;
   height: 19px;
+
   margin-top: 0.15rem;
+
   border: 1.5px solid var(--color-ink-soft);
   border-radius: 6px;
+
   cursor: pointer;
   position: relative;
-  transition: background 160ms ease, border-color 160ms ease;
+
+  transition:
+    background 160ms ease,
+    border-color 160ms ease,
+    transform 160ms ease;
 }
+
+/* Hover */
+
+.pack-item input[type="checkbox"]:hover {
+  border-color: var(--color-accent);
+}
+
+/* Click feedback */
+
+.pack-item input[type="checkbox"]:active {
+  transform: scale(0.92);
+}
+
+/* Checked */
+
 .pack-item input[type="checkbox"]:checked {
   background: var(--color-accent);
   border-color: var(--color-accent);
 }
 
+/* Check mark */
+
 .pack-item input[type="checkbox"]:checked::after {
-  content: '';
+  content: "";
+
   position: absolute;
+
   left: 5px;
   top: 1px;
+
   width: 5px;
   height: 10px;
+
   border: solid #fff;
   border-width: 0 2px 2px 0;
+
   transform: rotate(40deg);
 }
- 
+
+/* =========================================
+   ITEM TEXT
+========================================= */
+
 .pack-item__label {
   display: block;
+
   font-weight: 600;
   font-size: 0.98rem;
-  transition: color 160ms ease, opacity 160ms ease;
+
+  transition:
+    color 160ms ease,
+    opacity 160ms ease,
+    text-decoration-color 160ms ease;
 }
+
 .pack-item__reason {
   display: block;
+
   margin-top: 0.25rem;
+
   font-size: 0.82rem;
-  color: var(--color-ink-soft);
   line-height: 1.4;
+
+  color: var(--color-ink-soft);
 }
- 
-.pack-item input[type="checkbox"]:checked ~ .pack-item__body .pack-item__label {
+
+/* =========================================
+   COMPLETED ITEM
+========================================= */
+
+.pack-item input[type="checkbox"]:checked
+  ~ .pack-item__body
+  .pack-item__label {
   text-decoration: line-through;
+  text-decoration-thickness: 1px;
   opacity: 0.55;
 }
+
+/* Completed card */
+
+.pack-item:has(input[type="checkbox"]:checked) {
+  border-color: var(--color-accent);
+
+  background: color-mix(
+    in srgb,
+    var(--color-card) 94%,
+    var(--color-accent)
+  );
+}
+
+/* =========================================
+   KEYBOARD ACCESSIBILITY
+========================================= */
+
+.pack-item:focus-within {
+  border-color: var(--color-accent);
+
+  box-shadow:
+    0 0 0 3px
+    color-mix(
+      in srgb,
+      var(--color-accent) 20%,
+      transparent
+    );
+}
+
