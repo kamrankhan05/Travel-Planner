@@ -12,3 +12,21 @@
  
   .overview__stats { flex-wrap: wrap; gap: 1.4rem; }
 }
+
+
+
+/* Mobile */
+@media (max-width: 560px) {
+  .topbar { padding: 1.4rem 1.4rem; }
+  .topbar__meta { display: none; }
+ 
+  .hero__title { font-size: 2.6rem; }
+  .hero__subtitle { font-size: 0.95rem; }
+ 
+  .search-bar { width: 100%; }
+ 
+  .results { padding: 4rem 1.1rem 4rem; gap: 4rem; }
+ 
+  .gallery-grid { grid-template-columns: 1fr 1fr; grid-auto-rows: 130px; }
+  .gallery-item:first-child { grid-column: span 2; grid-row: span 1; }
+  .attractions-grid { grid-template-columns: 1fr; }}
