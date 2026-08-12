@@ -560,3 +560,12 @@ transition: transform 220ms ease, box-shadow 220ms ease;
   text-align: center;
   padding: 2rem;
 }
+
+/* Once Leaflet initializes, it adds this class to #map — override our
+   flex-centered placeholder styles so Leaflet's absolutely-positioned
+   panes lay out normally. */
+#map.leaflet-container {
+  display: block;
+  padding: 0;
+  font-family: var(--font-body);
+}
