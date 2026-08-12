@@ -29,4 +29,17 @@
  
   .gallery-grid { grid-template-columns: 1fr 1fr; grid-auto-rows: 130px; }
   .gallery-item:first-child { grid-column: span 2; grid-row: span 1; }
-  .attractions-grid { grid-template-columns: 1fr; }}
+  .attractions-grid { grid-template-columns: 1fr; }
+.bento { grid-template-columns: 1fr; gap: 1.1rem; }
+  .bento__cell--overview,
+  .bento__cell--weather,
+  .bento__cell--time,
+  .bento__cell--country,
+  .bento__cell--currency { grid-column: span 1; }
+ 
+  .bento__cell--overview { flex-direction: column; align-items: flex-start; gap: 1.4rem; }
+ 
+  .card { padding: 1.5rem 1.6rem; }
+ 
+  .map-placeholder, #map { height: 340px; }
+}
