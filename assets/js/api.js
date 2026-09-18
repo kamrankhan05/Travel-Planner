@@ -43,3 +43,17 @@ async function fetchWeather(lat, lon) {
     if (!res.ok) throw new Error(`Weather API request failed`);
     return res.json();
 }
+
+/**
+ * Country details by ISO alpha-2 country code.
+ * Source: REST Countries API v3.1. Field list is restricted to what we
+ * actually render, to keep the response small.
+ */
+
+async function fetchCountry(countryCode) {
+  const fields = 'name,capital,languages,currencies';
+  const url = `https://restcountries.com/v3.1/alpha/${countryCode}?fields=${fields}`;
+  const res = await fetch(url);
+  if (!res.ok) throw new Error(`Country API request failed`);
+  return await res.json();
+}
