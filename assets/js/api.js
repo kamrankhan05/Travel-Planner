@@ -72,7 +72,7 @@ async function fetchGallery(cityName, limit = 8) {
   const data = await res.json();
   const pages = data.query?.pages;
   if (!pages) return [];
-  
+
   return Object.values(pages)
    .filter((p) => p.imageinfo?.[0])
     .map((p) => {
@@ -87,4 +87,36 @@ async function fetchGallery(cityName, limit = 8) {
         credit: stripHtml(meta.Artist?.value ?? meta.Credit?.value ?? 'Wikimedia Commons'),
       };
     });
+}
+
+
+/**
+ * Nearby tourist attractions via Wikipedia's geosearch — free, no API key.
+ * Returns notable landmarks/points of interest within radius of a coordinate,
+ * enriched with a thumbnail and short extract from each article.
+ */
+async function fetchNearbyAttractions(lat, lon, limit = 6) {
+  const geoUrl = `https://en.wikipedia.org/w/api.php?action=query&list=geosearch&gscoord=${lat}|${lon}&gsradius=9000&gslimit=${limit}&format=json&origin=*`;
+  const geoRes = await fetch(geoUrl);
+  if (!geoRes.ok) throw new Error('Attractions request failed');
+  const geoData = await geoRes.json();
+  const results = geoData.query?.geosearch ?? [];
+  if (!results.length) return [];
+ 
+  const pageIds = results.map((r) => r.pageid).join('|');
+  const detailUrl = `https://en.wikipedia.org/w/api.php?action=query&pageids=${pageIds}&prop=pageimages|extracts&exintro=1&explaintext=1&exchars=160&piprop=thumbnail&pithumbsize=400&format=json&origin=*`;
+  const detailRes = await fetch(detailUrl);
+  const detailData = await detailRes.json();
+  const pages = detailData.query?.pages ?? {};
+ 
+  return results.map((r) => {
+    const page = pages[r.pageid];
+    return {
+      title: r.title,
+      distanceMeters: r.dist,
+      thumbUrl: page?.thumbnail?.source ?? null,
+      extract: page?.extract ?? '',
+      wikiUrl: `https://en.wikipedia.org/?curid=${r.pageid}`,
+    };
+  });
 }
