@@ -120,3 +120,34 @@ async function fetchNearbyAttractions(lat, lon, limit = 6) {
     };
   });
 }
+
+/**
+ * Orchestrates the full search for a single city, with caching. Weather,
+ * country, gallery, and attractions all fetch in parallel once geocoding
+ * resolves the coordinates/country code — one failing doesn't block the rest.
+ */
+async function fetchDestinationData(city) {
+  const cached = getCached(city);
+  if (cached) return cached;
+ 
+  const geo = await fetchGeocoding(city);
+  if (!geo) return null;
+ 
+  const [weather, country, gallery, attractions] = await Promise.allSettled([
+    fetchWeather(geo.latitude, geo.longitude),
+    fetchCountry(geo.country_code),
+    fetchCityGallery(geo.name),
+    fetchNearbyAttractions(geo.latitude, geo.longitude),
+  ]);
+ 
+  const result = {
+    geo,
+    weather: weather.status === 'fulfilled' ? weather.value : null,
+    country: country.status === 'fulfilled' ? country.value : null,
+    gallery: gallery.status === 'fulfilled' ? gallery.value : [],
+    attractions: attractions.status === 'fulfilled' ? attractions.value : [],
+  };
+ 
+  setCached(city, result);
+  return result;
+}
