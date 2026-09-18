@@ -57,3 +57,34 @@ async function fetchCountry(countryCode) {
   if (!res.ok) throw new Error(`Country API request failed`);
   return await res.json();
 }
+
+/**
+ * City photo gallery via Wikimedia Commons — free, no API key, CORS-enabled.
+ * Pulls files from the city's Commons category (e.g. "Category:Paris").
+ * Not every city has a populated category, so this can legitimately return [].
+ */
+
+async function fetchGallery(cityName, limit = 8) {
+  const category = encodeURIComponent(`Category:${cityName}`);
+  const url = `https://commons.wikimedia.org/w/api.php?action=query&generator=categorymembers&gcmtitle=${category}&gcmtype=file&gcmlimit=${limit}&prop=imageinfo&iiprop=url|extmetadata&iiurlwidth=600&format=json&origin=*`;
+  const res = await fetch(url);
+  if (!res.ok) throw new Error(`Gallery API request failed`);
+  const data = await res.json();
+  const pages = data.query?.pages;
+  if (!pages) return [];
+  
+  return Object.values(pages)
+   .filter((p) => p.imageinfo?.[0])
+    .map((p) => {
+      const info = p.imageinfo[0];
+      const meta = info.extmetadata ?? {};
+      return {
+        thumbUrl: info.thumburl ?? info.url,
+        fullUrl: info.url,
+        title:(meta.ObjectName?.value ?? p.title ?? '')
+         .replace(/^File:/, '')
+          .replace(/\.\w{3,4}$/, ''),
+        credit: stripHtml(meta.Artist?.value ?? meta.Credit?.value ?? 'Wikimedia Commons'),
+      };
+    });
+}
