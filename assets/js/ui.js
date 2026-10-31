@@ -240,3 +240,94 @@ function renderAttractions(attractions, cityName) {
     gridEl.appendChild(card);
   });
 }
+
+ 
+/**
+ * Marks a card as "not available" — used when a request fails, so the UI
+ * stays honest rather than showing stale placeholder data.
+ */
+function renderPendingCard(selector, label) {
+  const card = document.querySelector(selector);
+  if (!card) return;
+  const valueEl = card.querySelector('.card__value');
+  const descEl = card.querySelector('.card__desc');
+  if (valueEl) valueEl.textContent = '—';
+  if (descEl) descEl.textContent = label;
+}
+ 
+let mapInstance = null;
+let markerInstance = null;
+ 
+/**
+ * Initializes (or re-initializes) the Leaflet map for a given coordinate.
+ * Reuses one map instance across searches instead of recreating it.
+ */
+function renderMap(lat, lon, label) {
+  if (!window.L) return;
+ 
+  if (!mapInstance) {
+    mapInstance = L.map('map', { zoomControl: true }).setView([lat, lon], 11);
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+      maxZoom: 18,
+    }).addTo(mapInstance);
+    markerInstance = L.marker([lat, lon]).addTo(mapInstance);
+  } else {
+    mapInstance.setView([lat, lon], 11);
+    markerInstance.setLatLng([lat, lon]);
+  }
+ 
+  markerInstance.bindPopup(label).openPopup();
+ 
+  // The map section is hidden (display:none) during the loading state, so
+  // Leaflet may have measured a zero-size container — fix it up now that
+  // the section is visible again.
+  setTimeout(() => mapInstance.invalidateSize(), 60);
+}
+ 
+// Curated hero images per revised spec: avoids a live photo API and its
+// rate limits/attribution overhead. Add more entries as needed — any city
+// not listed falls back to a generic scenic image.
+const CITY_HERO_IMAGES = {
+  paris: 'https://images.unsplash.com/photo-1502602898657-3e91760cbb34?auto=format&fit=crop&w=2000&q=80',
+  tokyo: 'https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?auto=format&fit=crop&w=2000&q=80',
+  dubai: 'https://images.unsplash.com/photo-1512453979798-5ea266f8880c?auto=format&fit=crop&w=2000&q=80',
+  istanbul: 'https://images.unsplash.com/photo-1524231757912-21f4fe3a7200?auto=format&fit=crop&w=2000&q=80',
+  london: 'https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?auto=format&fit=crop&w=2000&q=80',
+  'new york': 'https://images.unsplash.com/photo-1496442226666-8d4d0e62e6e9?auto=format&fit=crop&w=2000&q=80',
+  rome: 'https://images.unsplash.com/photo-1552832230-c0197dd311b5?auto=format&fit=crop&w=2000&q=80',
+  barcelona: 'https://images.unsplash.com/photo-1583422409516-2895a77efded?auto=format&fit=crop&w=2000&q=80',
+  sydney: 'https://images.unsplash.com/photo-1506973035872-a4ec16b8e8d9?auto=format&fit=crop&w=2000&q=80',
+  bangkok: 'https://images.unsplash.com/photo-1508009603885-50cf7c579365?auto=format&fit=crop&w=2000&q=80',
+  default: 'https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?auto=format&fit=crop&w=2000&q=80',
+};
+ 
+/**
+ * Crossfades the hero background to match the searched city, using the
+ * curated image set above. Two stacked layers (#hero-image is the visible
+ * one, #hero-image-incoming fades in on top) since CSS can't interpolate
+ * a background-image change directly.
+ */
+function updateHeroBackground(city) {
+  const current = document.getElementById('hero-image');
+  const incoming = document.getElementById('hero-image-incoming');
+  if (!current || !incoming) return;
+ 
+  const key = city.trim().toLowerCase();
+  const url = CITY_HERO_IMAGES[key] ?? CITY_HERO_IMAGES.default;
+  const gradient = 'linear-gradient(180deg, rgba(10,14,22,0.15) 0%, rgba(10,14,22,0.55) 100%)';
+  const nextImage = `${gradient}, url('${url}')`;
+ 
+  if (current.style.backgroundImage === nextImage) return; // already showing this city
+ 
+  incoming.style.backgroundImage = nextImage;
+  // Force a reflow so the browser registers opacity:0 before we animate to 1.
+  void incoming.offsetWidth;
+  incoming.style.opacity = '1';
+ 
+  setTimeout(() => {
+    current.style.backgroundImage = nextImage;
+    incoming.style.opacity = '0';
+  }, 900);
+}
+ 
