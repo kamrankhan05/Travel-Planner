@@ -173,3 +173,34 @@ function renderPackingList(weather, cityName) {
     });
   });
 }
+
+
+/**
+ * Renders the photo gallery from Wikimedia Commons results.
+ * First image renders larger (featured spot in the grid).
+ */
+function renderGallery(images, cityName) {
+  const titleEl = document.getElementById('gallery-title');
+  const gridEl = document.getElementById('gallery-grid');
+  if (!gridEl) return;
+ 
+  titleEl.textContent = `Scenes from ${cityName}`;
+ 
+  if (!images.length) {
+    gridEl.innerHTML = `<p class="section-placeholder">No photos found on Wikimedia Commons for ${cityName} yet.</p>`;
+    return;
+  }
+ 
+  gridEl.innerHTML = '';
+  images.forEach((img) => {
+    const item = document.createElement('a');
+    item.className = 'gallery-item';
+    item.href = img.fullUrl;
+    item.target = '_blank';
+    item.rel = 'noopener noreferrer';
+    item.innerHTML = `
+      <img src="${img.thumbUrl}" alt="${img.title}" loading="lazy">
+      <span class="gallery-item__caption">${img.title || 'Untitled'} — ${img.credit}</span>`;
+    gridEl.appendChild(item);
+  });
+}
