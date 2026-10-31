@@ -86,3 +86,32 @@ function renderWeather(weather) {
   document.getElementById('weather-sunrise').textContent = formatClockFromIso(daily?.sunrise?.[0]);
   document.getElementById('weather-sunset').textContent = formatClockFromIso(daily?.sunset?.[0]);
 }
+
+ 
+/**
+ * Renders the country + currency cards, and fills in the overview's
+ * Languages stat, from a REST Countries v3.1 response.
+ */
+function renderCountry(country) {
+  if (!country) {
+    renderPendingCard('.bento__cell--country', "Couldn't load country data");
+    renderPendingCard('.bento__cell--currency', "Couldn't load currency data");
+    return;
+  }
+ 
+  const name = country.name?.common ?? '—';
+  const capital = country.capital?.[0] ?? '—';
+  const languages = formatLanguageList(country.languages);
+  const currencyEntries = country.currencies ? Object.entries(country.currencies) : [];
+  const [currencyCode, currencyInfo] = currencyEntries[0] ?? [null, null];
+ 
+  document.getElementById('country-name').textContent = name;
+  document.getElementById('country-capital').textContent = capital;
+  document.getElementById('country-currency').textContent = currencyCode ?? '—';
+  document.getElementById('stat-languages').textContent = languages;
+ 
+  if (currencyCode) {
+    document.getElementById('currency-code').textContent = `${currencyInfo.symbol ?? ''} ${currencyCode}`.trim();
+    document.getElementById('currency-name').textContent = currencyInfo.name ?? currencyCode;
+  }
+}
