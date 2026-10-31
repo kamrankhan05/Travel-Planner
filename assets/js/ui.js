@@ -204,3 +204,39 @@ function renderGallery(images, cityName) {
     gridEl.appendChild(item);
   });
 }
+
+/**
+ * Renders nearby tourist attractions from Wikipedia geosearch results.
+ */
+function renderAttractions(attractions, cityName) {
+  const titleEl = document.getElementById('attractions-title');
+  const gridEl = document.getElementById('attractions-grid');
+  if (!gridEl) return;
+ 
+  titleEl.textContent = `Worth seeing near ${cityName}`;
+ 
+  if (!attractions.length) {
+    gridEl.innerHTML = `<p class="section-placeholder">No nearby landmarks found for ${cityName}.</p>`;
+    return;
+  }
+ 
+  gridEl.innerHTML = '';
+  attractions.forEach((place) => {
+    const card = document.createElement('a');
+    card.className = 'attraction-card';
+    card.href = place.wikiUrl;
+    card.target = '_blank';
+    card.rel = 'noopener noreferrer';
+    const imageHtml = place.thumbUrl
+      ? `<img class="attraction-card__image" src="${place.thumbUrl}" alt="${place.title}" loading="lazy">`
+      : '';
+    card.innerHTML = `
+      ${imageHtml}
+      <div class="attraction-card__body">
+        <p class="attraction-card__title">${place.title}</p>
+        <p class="attraction-card__distance">${formatDistance(place.distanceMeters)}</p>
+        <p class="attraction-card__extract">${place.extract || 'No summary available.'}</p>
+      </div>`;
+    gridEl.appendChild(card);
+  });
+}
