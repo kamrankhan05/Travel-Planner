@@ -46,3 +46,21 @@ function renderOverview(geo) {
   coordsEl.textContent = formatCoordinates(geo.latitude, geo.longitude);
   languagesEl.textContent = '—';
 }
+
+
+/**
+ * Renders the local time card, derived from the geocoding timezone —
+ * no separate time API needed.
+ */
+function renderTime(timeZone) {
+  const valueEl = document.querySelector('.bento__cell--time .card__value');
+  const descEl = document.querySelector('.bento__cell--time .card__desc');
+  if (!timeZone) return;
+ 
+  const now = new Date();
+  valueEl.textContent = formatTime(now, timeZone);
+  const offset = new Intl.DateTimeFormat('en-US', { timeZone, timeZoneName: 'shortOffset' })
+    .formatToParts(now)
+    .find((p) => p.type === 'timeZoneName')?.value ?? '';
+  descEl.textContent = `${formatDate(now, timeZone)} · ${offset}`;
+}
