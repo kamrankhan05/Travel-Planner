@@ -17,6 +17,22 @@ const mapSection = document.querySelector('.map-section');
 const gallerySection = document.getElementById('gallery-section');
 const attractionsSection = document.getElementById('attractions-section');
 
+  
+/**
+ * Shows exactly one of: loading / empty / error / loaded.
+ */
+function setResultsState(state) {
+  const sections = [overviewCard, mapSection, gallerySection, attractionsSection];
+  const stateEls = { loading: stateLoading, empty: stateEmpty, error: stateError };
+ 
+  Object.values(stateEls).forEach((el) => el.setAttribute('hidden', ''));
+  sections.forEach((el) => (el.style.display = ''));
+ 
+  if (state === 'loaded') return;
+ 
+  stateEls[state]?.removeAttribute('hidden');
+  sections.forEach((el) => (el.style.display = 'none'));
+}
  
 /**
  * Renders the destination overview cell from live geocoding data.
