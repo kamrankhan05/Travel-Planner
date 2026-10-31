@@ -131,3 +131,45 @@ function renderCountry(country) {
     document.getElementById('currency-name').textContent = currencyInfo.name ?? currencyCode;
   }
 }
+
+/**
+ * Renders the "Pack for it" checklist from the current weather.
+ * Rebuilds the list each search — checkbox state intentionally resets,
+ * since it's a fresh destination's packing list, not a persistent one.
+ */
+function renderPackingList(weather, cityName) {
+  const titleEl = document.getElementById('pack-title');
+  const listEl = document.getElementById('pack-list');
+  if (!listEl) return;
+ 
+  titleEl.textContent = `Packing for ${cityName}`;
+ 
+  const items = generatePackingList(weather);
+  listEl.innerHTML = '';
+ 
+  if (!items.length) {
+    listEl.innerHTML = '<li class="pack-item"><label><div class="pack-item__body"><span class="pack-item__label">Weather unavailable</span><span class="pack-item__reason">Can\u2019t generate a packing list without current conditions.</span></div></label></li>';
+    return;
+  }
+ 
+  items.forEach((item, i) => {
+    const li = document.createElement('li');
+    li.className = 'pack-item';
+    li.innerHTML = `
+      <label>
+        <input type="checkbox">
+        <div class="pack-item__body">
+          <span class="pack-item__label">${item.label}</span>
+          <span class="pack-item__reason">${item.reason}</span>
+        </div>
+      </label>`;
+    li.style.opacity = '0';
+    li.style.transform = 'translateY(14px)';
+    li.style.transition = `opacity 500ms ease ${i * 60}ms, transform 500ms ease ${i * 60}ms`;
+    listEl.appendChild(li);
+    requestAnimationFrame(() => {
+      li.style.opacity = '1';
+      li.style.transform = 'translateY(0)';
+    });
+  });
+}
