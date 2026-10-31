@@ -64,3 +64,25 @@ function renderTime(timeZone) {
     .find((p) => p.type === 'timeZoneName')?.value ?? '';
   descEl.textContent = `${formatDate(now, timeZone)} · ${offset}`;
 }
+
+ 
+/**
+ * Renders the weather card from an Open-Meteo forecast response.
+ */
+function renderWeather(weather) {
+  if (!weather?.current) {
+    renderPendingCard('.bento__cell--weather', "Couldn't load weather");
+    return;
+  }
+  const { current, daily } = weather;
+  const tempEl = document.getElementById('stat-temp');
+ 
+  tempEl.dataset.countup = String(Math.round(current.temperature_2m));
+  animateCountUp(tempEl, current.temperature_2m, '°');
+ 
+  document.getElementById('weather-desc').textContent = weatherCodeToDescription(current.weather_code);
+  document.getElementById('weather-humidity').textContent = formatMetric(current.relative_humidity_2m, '%');
+  document.getElementById('weather-wind').textContent = formatMetric(Math.round(current.wind_speed_10m), 'km/h');
+  document.getElementById('weather-sunrise').textContent = formatClockFromIso(daily?.sunrise?.[0]);
+  document.getElementById('weather-sunset').textContent = formatClockFromIso(daily?.sunset?.[0]);
+}
